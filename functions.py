@@ -2,7 +2,7 @@ bin_to_hex_dict = {'0000': '0', '0001': '1', '0010': '2', '0011': '3', '0100': '
 hex_to_bin_dict = {v: k for k, v in bin_to_hex_dict.items()}
 
 
-def dec_to_bin(num):
+def dec_to_bin(num: int | str) -> str:
     num = int(num)
     bin_num = []
     while num != 0:
@@ -13,7 +13,7 @@ def dec_to_bin(num):
     return ''.join(bin_num)
 
 
-def bin_to_hex(bin_num):
+def bin_to_hex(bin_num: str) -> str:
     bin_num = list(bin_num)
     while len(bin_num) % 4 != 0:
         bin_num.insert(0, '0')
@@ -27,25 +27,28 @@ def bin_to_hex(bin_num):
     return ''.join(result)
 
 
-def dec_to_hex(num):
+def dec_to_hex(num: int | str) -> str:
     return bin_to_hex(dec_to_bin(num))
 
 
-def hex_to_bin(num):
+def hex_to_bin(num: str) -> str:
     num_list = list(num)
     bin_num = [hex_to_bin_dict[n] for n in num_list]
     bin_num = ''.join(bin_num)
     bin_num = list(bin_num)
-    while bin_num[0] == 0:
+    while bin_num[0] == '0':
         bin_num.pop(0)
     return ''.join(bin_num)
 
-def bin_to_dec(num):
+
+def bin_to_dec(num: str) -> int:
     dec_sum = 0
+    num = list(num)
+    num.reverse()
     for i, digit in enumerate(num):
         dec_sum += int(digit) * 2**i
     return dec_sum
 
 
-def hex_to_dec(num):
+def hex_to_dec(num: str) -> int:
     return bin_to_dec(hex_to_bin(num))
